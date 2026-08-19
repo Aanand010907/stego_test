@@ -1,0 +1,32 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install system dependencies for Pillow and scientific packages
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    libpng-dev \
+    libjpeg-dev \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt \
+    fastapi \
+    "uvicorn[standard]" \
+    python-multipart \
+    reportlab \
+    pydantic-settings \
+    aiofiles \
+    httpx
+
+COPY model_xray/ ./model_xray/
+COPY scripts/ ./scripts/
+COPY pytest.ini ./
+
+ENV PYTHONUNBUFFERED=1
+ENV MODEL_XRAY_DB_PATH=/app/data/model_xray.db
+
+EXPOSE 8000
+
+CMD ["uvicorn", "model_xray.api.app:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -1,0 +1,37 @@
+# Python
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# Frontend
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+
+# Runtime data
+data/model_xray.db
+data/tmp_uploads/
+data/artifacts/
+
+# Large/local model checkpoints
+testdata/checkpoints/
+testdata/synthetic/_tmp_clean_bases/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Vercel
+.vercel/
+
+# Logs
+*.log
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/

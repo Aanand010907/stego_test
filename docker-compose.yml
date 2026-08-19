@@ -1,0 +1,38 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: model_xray_backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - model_xray_data:/app/data
+      - model_xray_testdata:/app/testdata
+    environment:
+      - MODEL_XRAY_DB_PATH=/app/data/model_xray.db
+      - MAX_FILE_SIZE_BYTES=262144000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: model_xray_frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  model_xray_data:
+  model_xray_testdata:

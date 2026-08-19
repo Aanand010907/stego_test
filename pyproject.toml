@@ -1,0 +1,18 @@
+[project]
+name = "stego_test"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=1.26",
+    "scipy>=1.11",
+    "safetensors>=0.4.0",
+    "pillow>=10.0",
+    "pydantic>=2.6",
+    "pytest>=8.0",
+    "torch>=2.1",
+    "fastapi>=0.115",
+    "uvicorn>=0.30"
+]
+
+[tool.vercel]
+entrypoint = "model_xray.api.app:app"
