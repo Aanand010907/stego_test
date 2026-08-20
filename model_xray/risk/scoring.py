@@ -38,12 +38,12 @@ def concat_float32(tensors: dict[str, np.ndarray]) -> np.ndarray | None:
 
 
 def _renormalize(weights: dict[str, float], active: list[str]) -> dict[str, float]:
-    subset = {name: weights[name] for name in active if weights.get(name, 0) > 0}
+    subset = {name: weights.get(name, 0.0) for name in active if weights.get(name, 0.0) > 0}
     total = sum(subset.values())
     if total <= 0:
         even = 1.0 / len(active) if active else 0.0
         return {name: even for name in active}
-    return {name: subset[name] / total for name in active}
+    return {name: subset.get(name, 0.0) / total for name in active}
 
 
 def score_risk(

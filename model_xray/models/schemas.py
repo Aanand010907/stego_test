@@ -201,3 +201,31 @@ class DashboardStats(BaseModel):
     risk_distribution: dict[str, int]
     average_duration_sec: float
     recent_scans: list[dict[str, Any]]
+
+
+class DifferentialLayerDiff(BaseModel):
+    layer_name: str
+    parameter_count: int
+    altered_parameter_count: int
+    altered_fraction: float
+    l2_distance: float
+    max_absolute_diff: float
+    altered_bit_positions: list[int] = Field(default_factory=list)
+    min_altered_bit: int | None = None
+    max_altered_bit: int | None = None
+
+
+class DifferentialScanResult(BaseModel):
+    reference_model: str
+    reference_sha256: str
+    candidate_model: str
+    candidate_sha256: str
+    total_parameters: int
+    total_altered_parameters: int
+    altered_parameter_fraction: float
+    altered_layers_count: int
+    total_layers_count: int
+    layers: list[DifferentialLayerDiff]
+    tampering_evidence: str
+    differential_risk_score: float
+    differential_risk_band: str

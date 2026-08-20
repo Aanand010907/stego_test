@@ -21,8 +21,8 @@ class RiskConfig(BaseModel):
     weight_lsb_ones_ratio: float = 0.10
     weight_neighbor_lsb_correlation: float = 0.10
     weight_bit_frequency_deviation: float = 0.10
-    weight_histogram_entropy: float = 0.05
-    weight_embedding_affinity: float = 0.35
+    weight_embedding_affinity: float = 0.40
+    weight_histogram_entropy: float = 0.00  # Diagnostic-only (LSB changes do not move macroscopic density)
 
     # Robust anomaly z-score thresholds:
     # z <= z_threshold_start is normal (score=0)
@@ -43,8 +43,8 @@ class RiskConfig(BaseModel):
             "lsb_ones_ratio": self.weight_lsb_ones_ratio,
             "neighbor_lsb_correlation": self.weight_neighbor_lsb_correlation,
             "bit_frequency_deviation": self.weight_bit_frequency_deviation,
-            "histogram_entropy": self.weight_histogram_entropy,
             "embedding_affinity": self.weight_embedding_affinity,
+            "histogram_entropy": self.weight_histogram_entropy,
         }
 
     def band_for(self, score: float) -> str:
