@@ -9,10 +9,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "#080c14",
-        surface: "#0f172a",
-        "surface-light": "#1e293b",
-        "surface-border": "#334155",
+        background: "#0A0A0A",
+        surface: "#0F0F0F",
+        "brutal-black": "#0A0A0A",
+        "brutal-white": "#FAFAFA",
+        "brutal-gray": "#333333",
+        "brutal-muted": "#888888",
+        "brutal-border": "#333333",
         brand: {
           50: "#eff6ff",
           500: "#3b82f6",
@@ -28,22 +31,42 @@ module.exports = {
       },
       fontFamily: {
         mono: [
-          "JetBrains Mono",
+          "var(--font-mono)",
+          "'JetBrains Mono'",
           "ui-monospace",
           "SFMono-Regular",
           "Menlo",
-          "Monaco",
           "Consolas",
           "monospace",
         ],
         sans: [
+          "var(--font-sans)",
           "Inter",
           "-apple-system",
           "BlinkMacSystemFont",
-          "Segoe UI",
-          "Roboto",
+          "Helvetica",
           "sans-serif",
         ],
+      },
+      borderRadius: {
+        DEFAULT: "0px",
+        none: "0px",
+        sm: "0px",
+        md: "0px",
+        lg: "0px",
+        xl: "0px",
+        "2xl": "0px",
+        "3xl": "0px",
+        full: "0px",
+      },
+      keyframes: {
+        "spin-30s": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+      },
+      animation: {
+        "spin-30s": "spin-30s 30s linear infinite",
       },
     },
   },

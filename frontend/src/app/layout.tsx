@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { AuthProvider } from "../lib/auth";
+import { AsciiMaskTransition } from "../components/AsciiMaskTransition";
 
 export const metadata: Metadata = {
-  title: "Model X-Ray // Defensive Steganalysis Security Platform",
+  title: "Model X-Ray // Brutalist ASCII Steganalysis SPA",
   description:
-    "AI Model Steganography Detection and Weight Integrity Verification for Clinical and Precision Healthcare AI.",
+    "Defensive AI model steganalysis, zero-trust neural weight integrity auditing, and supply chain verification.",
 };
 
 export default function RootLayout({
@@ -14,8 +16,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className="min-h-screen bg-[#080C14] text-slate-100 antialiased selection:bg-blue-600 selection:text-white">
-        {children}
+      <body className="min-h-screen bg-[#0A0A0A] text-[#FAFAFA] antialiased selection:bg-[#FAFAFA] selection:text-[#0A0A0A] font-sans">
+        <AuthProvider>
+          <AsciiMaskTransition>{children}</AsciiMaskTransition>
+        </AuthProvider>
       </body>
     </html>
   );
